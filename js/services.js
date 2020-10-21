@@ -22,6 +22,12 @@ var gImgs = [
     { id: 4, url: './imgs/4.jpg' },
     { id: 5, url: './imgs/5.jpg' },
     { id: 6, url: './imgs/6.jpg' },
+    { id: 7, url: './imgs/7.jpg' },
+    { id: 8, url: './imgs/8.jpg' },
+    { id: 9, url: './imgs/9.jpg' },
+    { id: 10, url: './imgs/10.jpg' },
+    { id: 11, url: './imgs/11.jpg' },
+    { id: 12, url: './imgs/12.jpg' },
 ]
 
 var gMeme = {

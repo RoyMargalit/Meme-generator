@@ -9,32 +9,51 @@
 </head>
 
 <body onload="onInit()">
-    <header>
-        <h1>MEMES</h1>
+    <header class="main-header">
+        <div class="header-container flex space-between align-center">
+            <div class="logo-text flex space-between align-center">MEMES </div>
+            <ul class="main-nav flex clean-list align-center justify-center">
+                <li>
+                    <div class="navbar flex">
+                </li>
+                <li><a href=# class="flex align-center">About</a></li>
+                <li><a href=# class="flex align-center">Work</a></li>
+                <li><a href=# class="flex align-center">Contact</a></li>
+            </ul>
+
+        </div>
     </header>
+
+
+
+
     <!-- should do on input so as clicks it changes -->
-    <div class="control-box">
-        <h2>Meme-editor:</h2>
-        <label for="line1">Input line:</label>
-        <input type="text" name="line1" class="top-text" value="" oninput="onTopText(0,value)"  placeholder="Line 1!"></input>
-        <button onclick="onFontSize(2)">➕</button>
-        <button onclick="onFontSize(-2)">➖</button>
-        <button onclick="onChangeLine()">⬆ ⬇</button>
-        <button onclick="onUp()">Up⬆</button>
-        <button onclick="onDown()">Down⬇</button>
-        <button onclick="clearCanvas()">Clear</button>
-        <button onclick="clearText()">Clear TXT</button>
-        <button ><a href="#" onclick="onDownload(this)" download="">Download</a></button>
-        <button onclick="onAddLine()">Add Line</button>
-        <input type="text" name="line2" class="bottom-text hide" oninput="onBottomText(1,value)"   placeholder="Line 2!"></input>
-        <div class="bot"></div>
+    <div class="editor">
+        <div class="control-box hide">
+            <h2>Meme-editor:</h2>
+            <label for="line1">Input line:</label>
+            <input type="text" name="line1" class="top-text" value="" oninput="onTopText(0,value)"
+                placeholder="Line 1!"></input>
+            <button onclick="onFontSize(2)">➕</button>
+            <button onclick="onFontSize(-2)">➖</button>
+            <button onclick="onChangeLine()">⬆ ⬇</button>
+            <button onclick="onUp()">Up⬆</button>
+            <button onclick="onDown()">Down⬇</button>
+            <button onclick="clearCanvas()">Clear</button>
+            <button onclick="clearText()">Clear TXT</button>
+            <button><a href="#" onclick="onDownload(this)" download="">Download</a></button>
+            <button onclick="onAddLine()">Add Line</button>
+            <button onclick="onBack()">back to gallery</button>
+            <input type="text" name="line2" class="bottom-text hide" oninput="onBottomText(1,value)"
+                placeholder="Line 2!"></input>
+            <div class="bot"></div>
+        </div>
+        <div class="canvas-container hide">
+            <canvas id="meme-canvas" onclick="draw(event)" height="450" width="450"></canvas>
+        </div>
     </div>
     <section class="gallery-container"> </section>
 
-    <div class="canvas-container">
-        <canvas id="meme-canvas" onclick="draw(event)" height="450" width="450"></canvas>
-    </div>
-    
     <script src="js/services.js"></script>
     <script src="js/controller.js"></script>
 </body>
