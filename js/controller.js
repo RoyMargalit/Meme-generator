@@ -51,28 +51,28 @@ function drawText(text, x, y) {
 function onTopText(idx, value) {
     gTopText = value
     gMeme.lines[idx].txt = value
-    drawTxt(gMeme.lines[idx].x1,gMeme.lines[idx].y1,idx)
+    drawTxt(gMeme.lines[idx].x1, gMeme.lines[idx].y1, idx)
 }
 function onBottomText(idx, value) {
-    var newFig={
-        txt:value,
-        size:48,
-        align:'left',
-        color:'black',
+    var newFig = {
+        txt: value,
+        size: 48,
+        align: 'left',
+        color: 'black',
         x1: 50,
-        y1:gCanvas.height-50,
+        y1: gCanvas.height - 50,
 
     }
-    gMeme.lines.splice(1,idx,newFig)
+    gMeme.lines.splice(1, idx, newFig)
     console.log(gMeme.lines)
-    drawTxt(gMeme.lines[idx].x1,gMeme.lines[idx].y1,idx)
+    drawTxt(gMeme.lines[idx].x1, gMeme.lines[idx].y1, idx)
 
     // if(gMeme.lines[idx].txt==='') drawImg()
 }
 
-function drawTxt(x,y,idx){
-    if(gMeme.lines[idx].txt==='') drawImg()
-    console.log(x,y)
+function drawTxt(x, y, idx) {
+    if (gMeme.lines[idx].txt === '') drawImg()
+    console.log(x, y)
     drawText(gMeme.lines[idx].txt, gMeme.lines[idx].x1, gMeme.lines[idx].y1)
 }
 
@@ -86,16 +86,10 @@ function draw(ev) {////switch this
 
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
-    document.querySelector('.top-text').value='' 
-    document.querySelector('.bottom-text').value='' 
+    document.querySelector('.top-text').value = ''
+    document.querySelector('.bottom-text').value = ''
 }
 
-// function clearText() {
-//     gCtx.font = `${gMeme.lines[0].size} Impact`;
-//     gCtx.fillStyle = "white";
-//     console.log(gMeme.lines[0].x1, gMeme.lines[0].y1,'waiting!!!!!')
-//     gCtx.fillText('fhiqgfiuq', gMeme.lines[0].x1, gMeme.lines[0].y1);
-// }
 
 
 
@@ -112,42 +106,77 @@ function clearedCanvas() {
 }
 
 
-
-function onFontSize(num) {
-    clearedCanvas()
-    drawImg();
-    setTimeout(function(){ gMeme.lines[0].size += num
-        gMeme.lines[1].size += num
-        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1) 
-        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1) 
-    }, 50);
-    
-    
-}
 ////find a way to sent idx
-function onUp() {
+
+function onFontSize(num, idx) {
     clearedCanvas()
     drawImg();
-   
-    setTimeout(function(){ gMeme.lines[0].y1 += -10
+    setTimeout(function () {
+        gMeme.lines[0].size += num
+        gMeme.lines[1].size += num
+        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1)
+        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1)
+    }, 50);
+
+
+}
+function onUp(idx) {
+    clearedCanvas()
+    drawImg();
+
+    setTimeout(function () {
+        gMeme.lines[0].y1 += -10
         gMeme.lines[1].y1 += -10
-        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1) 
-        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1) 
+        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1)
+        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1)
     }, 50);
 }
-function onDown() {
+function onDown(idx) {
     clearedCanvas()
     drawImg();
-    setTimeout(function(){ gMeme.lines[0].y1 += +10
-        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1 += 10) 
-        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1 += 10) 
-    
+    setTimeout(function () {
+        gMeme.lines[0].y1 += +10
+        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1 += 10)
+        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1 += 10)
+
     }, 50);
 }
 
-function onDeleteLine(){
+function onDeleteLine() {
     clearedCanvas()
     drawImg();
 
-////finish later
+    ////finish later
 }
+
+function onDownload(elLink) {
+    const data = gCanvas.toDataURL()
+    console.log(data);
+    elLink.href = data
+    elLink.download = 'meme.jpg'
+}
+
+function onAddLine() {
+    var elLine = document.querySelector('.bottom-text')
+    var elBot = document.querySelector('.bot')
+    console.log(elLine)
+
+    var strHtml = ''
+    // console.log(strHtml)
+    elLine.classList.remove('hide')
+
+    gMeme.lines.forEach(line => {
+        strHtml += `<button onclick="onFontSize(2)">+</button>
+        <button onclick="onFontSize(-2)">-</button>
+        <button onclick="onChangeLine()">⬆ ⬇</button>
+        <button onclick="onUp()">Up⬆</button>
+        <button onclick="onDown()">Down⬇</button>
+        <button onclick="clearCanvas()">Clear</button>
+        <button onclick="clearText()">Clear TXT</button> `
+    });
+
+    elBot.innerHTML += strHtml
+
+}
+
+
