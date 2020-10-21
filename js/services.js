@@ -20,7 +20,7 @@ var gMeme = {
     lines:[
         {
             txt:'HUMMUS!',
-            size:20,
+            size:48,
             align:'left',
             color:'red'
         }

@@ -14,14 +14,19 @@ img{
     height: 250px;
 }
 
-
 .gallery-container{
     display: flex;
     flex-wrap: wrap;
-} 
+}
+canvas{
+    background-color:lightcyan;
+    width: 250px;
+    height: 250px;
+}
 
 .canvas-container{
     border: 1px solid black;
     background-color: beige;
-    /* display: none; */
+    width: 250px;
+    height: 250px;
 }
