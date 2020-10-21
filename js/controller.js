@@ -1,10 +1,13 @@
 'use strict'
 console.log('controller');
+var gCanvas = document.querySelector('#meme-canvas');
+var gCtx = gCanvas.getContext('2d');
+var gOl
 
 
 function onInit() {
-    init()
     renderGallery()
+    init()
 }
 
 function renderGallery() {
@@ -17,43 +20,134 @@ function renderGallery() {
     image.innerHTML = strHtml
 }
 
-function getImg(imgId){
+function getImg(imgId) {
     console.log(imgId)
-    gMeme.selectedImgId=imgId
+    gMeme.selectedImgId = imgId
     console.log(gMeme)
     drawImg()
 }
 function drawImg() {
+    console.log('drawing');
     var img = new Image()
     img.src = `./imgs/${gMeme.selectedImgId}.jpg`;
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
     }
-    //HERE STANDS A 0 BUT LATER THAT WILL CHANGE SINCE THE LINE WILL BE PROMPT
 }
 
-function drawText(text,x,y){
-    console.log('drawing........')
-    console.log(x,y)
-    gCtx.strokeStyle = 'red'///change later by color
+function drawText(text, x, y) {
+    gCtx.strokeStyle = gMeme.lines[0].color///change later by color
     gCtx.fillStyle = 'white'
     gCtx.lineWidth = '2'
     gCtx.font = `${gMeme.lines[0].size}px Impact`
     console.log(gMeme.lines[0].size)
     // gCtx.textAlign = 'start'
     gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y) 
+    gCtx.strokeText(text, x, y)
 }
 
 
-function draw(ev){
+
+function onTopText(idx, value) {
+    gTopText = value
+    gMeme.lines[idx].txt = value
+    drawTxt(gMeme.lines[idx].x1,gMeme.lines[idx].y1,idx)
+}
+function onBottomText(idx, value) {
+    var newFig={
+        txt:value,
+        size:48,
+        align:'left',
+        color:'black',
+        x1: 50,
+        y1:gCanvas.height-50,
+
+    }
+    gMeme.lines.splice(1,idx,newFig)
+    console.log(gMeme.lines)
+    drawTxt(gMeme.lines[idx].x1,gMeme.lines[idx].y1,idx)
+
+    // if(gMeme.lines[idx].txt==='') drawImg()
+}
+
+function drawTxt(x,y,idx){
+    if(gMeme.lines[idx].txt==='') drawImg()
+    console.log(x,y)
+    drawText(gMeme.lines[idx].txt, gMeme.lines[idx].x1, gMeme.lines[idx].y1)
+}
+
+
+function draw(ev) {////switch this
     const { offsetX, offsetY } = ev
     console.log(ev)
-    drawText(gMeme.lines[0].txt,50,100)
+    drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1)
 }
 
-function onInputText(value){
-    console.log(value)
-   gMeme.lines[0].txt=value
-   console.log(gMeme.lines[0].txt)
+
+function clearCanvas() {
+    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+    document.querySelector('.top-text').value='' 
+    document.querySelector('.bottom-text').value='' 
+}
+
+// function clearText() {
+//     gCtx.font = `${gMeme.lines[0].size} Impact`;
+//     gCtx.fillStyle = "white";
+//     console.log(gMeme.lines[0].x1, gMeme.lines[0].y1,'waiting!!!!!')
+//     gCtx.fillText('fhiqgfiuq', gMeme.lines[0].x1, gMeme.lines[0].y1);
+// }
+
+
+
+
+
+
+
+
+
+
+
+function clearedCanvas() {
+    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+}
+
+
+
+function onFontSize(num) {
+    clearedCanvas()
+    drawImg();
+    setTimeout(function(){ gMeme.lines[0].size += num
+        gMeme.lines[1].size += num
+        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1) 
+        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1) 
+    }, 50);
+    
+    
+}
+////find a way to sent idx
+function onUp() {
+    clearedCanvas()
+    drawImg();
+   
+    setTimeout(function(){ gMeme.lines[0].y1 += -10
+        gMeme.lines[1].y1 += -10
+        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1) 
+        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1) 
+    }, 50);
+}
+function onDown() {
+    clearedCanvas()
+    drawImg();
+    setTimeout(function(){ gMeme.lines[0].y1 += +10
+        drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1 += 10) 
+        drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1 += 10) 
+    
+    }, 50);
+}
+
+function onDeleteLine(){
+    clearedCanvas()
+    drawImg();
+
+////finish later
 }

@@ -1,9 +1,19 @@
 'use strict'
 console.log('services')
-// var gCanvas;
-// var gCtx;
-var gCanvas = document.querySelector('#meme-canvas');
-var gCtx = gCanvas.getContext('2d');
+
+var gTopText;
+var gBottomText;
+
+
+function init() {
+    gCanvas = document.querySelector('#meme-canvas');
+    gCtx = gCanvas.getContext('2d');
+    gTopText=document.querySelector('.top-text').value
+    console.log(gTopText)
+    
+}
+
+
 
 var gImgs = [
     { id: 1, url: './imgs/1.jpg' },
@@ -19,17 +29,12 @@ var gMeme = {
     selectedLineIdx: 0,
     lines:[
         {
-            txt:'HUMMUS!',
+            txt:'',
             size:48,
             align:'left',
-            color:'red'
+            color:'black',
+            x1: 50,
+            y1:100,
         }
     ]
-}
-
-
-function init() {
-    gCanvas = document.querySelector('#meme-canvas');
-    gCtx = gCanvas.getContext('2d');
-    
 }
