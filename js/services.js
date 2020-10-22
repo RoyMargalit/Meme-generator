@@ -1,6 +1,6 @@
 'use strict'
 console.log('services')
-
+var gId = 0
 var gTopText;
 var gBottomText;
 
@@ -8,9 +8,9 @@ var gBottomText;
 function init() {
     gCanvas = document.querySelector('#meme-canvas');
     gCtx = gCanvas.getContext('2d');
-    gTopText=document.querySelector('.top-text').value
+    gTopText = document.querySelector('.top-text').value
     console.log(gTopText)
-    
+
 }
 
 
@@ -28,19 +28,58 @@ var gImgs = [
     { id: 10, url: './imgs/10.jpg' },
     { id: 11, url: './imgs/11.jpg' },
     { id: 12, url: './imgs/12.jpg' },
+    { id: 13, url: './imgs/13.jpg' },
+    { id: 14, url: './imgs/14.jpg' },
+    { id: 15, url: './imgs/15.jpg' },
+    { id: 16, url: './imgs/16.jpg' },
 ]
+
+var gLines = []
 
 var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
-    lines:[
-        {
-            txt:'',
-            size:48,
-            align:'left',
-            color:'black',
-            x1: 50,
-            y1:100,
-        }
-    ]
+    lines: []
 }
+
+function getLinesForDisplay() {
+    return gLines;
+}
+
+function createLine(val, idx) {
+    var line = {
+        txt: val,
+        size: 48,
+        align: 'left',
+        color: 'black',
+        x1: 50,
+        y1: 100*idx+100,
+    }
+    return line
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // {
+        //     txt:'',
+        //     size:48,
+        //     align:'left',
+        //     color:'black',
+        //     x1: 50,
+        //     y1:100,
+        // }

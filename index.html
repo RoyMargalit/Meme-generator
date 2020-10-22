@@ -32,11 +32,11 @@
         <div class="control-box hide">
             <h2>Meme-editor:</h2>
             <label for="line1">Input line:</label>
-            <input type="text" name="line1" class="top-text" value="" oninput="onTopText(0,value)"
+            <input type="text" name="line1" class="top-text" class="input1" oninput="onText(value)"
                 placeholder="Line 1!"></input>
             <button onclick="onFontSize(2)">➕</button>
             <button onclick="onFontSize(-2)">➖</button>
-            <button onclick="onChangeLine()">⬆ ⬇</button>
+            <button onclick="onSelectedLine()">⬆ ⬇</button>
             <button onclick="onUp()">Up⬆</button>
             <button onclick="onDown()">Down⬇</button>
             <button onclick="clearCanvas()">Clear</button>
@@ -44,12 +44,10 @@
             <button><a href="#" onclick="onDownload(this)" download="">Download</a></button>
             <button onclick="onAddLine()">Add Line</button>
             <button onclick="onBack()">back to gallery</button>
-            <input type="text" name="line2" class="bottom-text hide" oninput="onBottomText(1,value)"
-                placeholder="Line 2!"></input>
             <div class="bot"></div>
         </div>
         <div class="canvas-container hide">
-            <canvas id="meme-canvas" onclick="draw(event)" height="450" width="450"></canvas>
+            <canvas id="meme-canvas" height="450" width="450"></canvas>
         </div>
     </div>
     <section class="gallery-container"> </section>
