@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme generator</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://kit.fontawesome.com/b540f94807.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body onload="onInit()">
@@ -28,7 +30,7 @@
 
 
     <!-- should do on input so as clicks it changes -->
-    <div class="editor">
+    <div class="editor grid-container">
         <div class="control-box hide">
             <h2>Meme-editor:</h2>
             <label for="line1">Input line:</label>
@@ -40,16 +42,20 @@
             <button onclick="onUp()">Up⬆</button>
             <button onclick="onDown()">Down⬇</button>
             <button onclick="clearCanvas()">Clear</button>
-            <button onclick="clearText()">Clear TXT</button>
+            <button onclick="onDeleteLine()">Delete line</button>
             <button><a href="#" onclick="onDownload(this)" download="">Download</a></button>
             <button onclick="onAddLine()">Add Line</button>
             <button onclick="onBack()">back to gallery</button>
+            <button onclick="onAlign('center')">Align Center</button>
+            <button onclick="onAlign('right')">Align Right</button>
+            <button onclick="onAlign('left')">Align Left</button>
             <div class="bot"></div>
         </div>
         <div class="canvas-container hide">
             <canvas id="meme-canvas" height="450" width="450"></canvas>
         </div>
     </div>
+    
     <section class="gallery-container"> </section>
 
     <script src="js/services.js"></script>

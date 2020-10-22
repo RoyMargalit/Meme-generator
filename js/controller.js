@@ -43,24 +43,20 @@ function drawImg() {
 
 function drawText(line) {
     gCtx.strokeStyle = line.color
-    gCtx.fillStyle = 'white'
+    gCtx.fillStyle = `${gMeme.color}`
     gCtx.lineWidth = '2'
     gCtx.font = `${line.size}px Impact`
-    gCtx.textAlign = `${line.align}`
+    gCtx.textAlign = `left`///should not be like this come back if u have time
 
     gCtx.fillText(line.txt, line.x1, line.y1)
     gCtx.strokeText(line.txt, line.x1, line.y1)
-    // gCtx.rect(textW.width,50,line.x1,line.y1);
-    // gCtx.stroke();
 }
 
-
 function onText(value) {
-
     if (gLines.length === 3) {
-        gLines.splice(2, 1, createLine(value, 2))
+        gLines.splice(2, 1, createLine(value, 1))
     } else if (gLines.length === 2) {
-        gLines.splice(1, 1, createLine(value, 1))
+        gLines.splice(1, 1, createLine(value, 2))
     } else if (gLines.length === 0 || gLines.length === 1) {
         gLines.splice(0, 1, createLine(value, 0))
     }
@@ -90,7 +86,6 @@ function clearedCanvas() {
 }
 
 
-
 function onFontSize(num) {
     // clearedCanvas()
     drawImg();
@@ -105,25 +100,17 @@ function onUp(idx) {
     // clearedCanvas()
     drawImg();
     setTimeout(function () {
-        // gMeme.lines[0].y1 += -10
-        // gMeme.lines[1].y1 += -10
         gLines[gSelected].y1 += -10
         gCtx.beginPath()
         renderLines(true)
-        // drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1)
-        // drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1)
     }, 50);
 }
 function onDown(idx) {
-    // clearedCanvas()
     drawImg();
     setTimeout(function () {
         gLines[gSelected].y1 += +10
-        // gMeme.lines[0].y1 += +10
         gCtx.beginPath()
         renderLines(true)
-        // drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1 += 10)
-        // drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1 += 10)
 
     }, 50);
 }
@@ -135,7 +122,7 @@ function onDownload(elLink) {
         const data = gCanvas.toDataURL()
         elLink.href = data
         elLink.download = 'meme.jpg'
-    }, 50);
+    }, 150);
 }
 
 function onAddLine() {
@@ -151,14 +138,26 @@ function onBack() {
     var elControl = document.querySelector('.control-box')
     var elCan = document.querySelector('.canvas-container')
     elControl.classList.add('hide')
-    elCan.classList.add('hide')
+    elCan.classList.add('hide') 
     var elGallery = document.querySelector('.gallery-container')
     elGallery.classList.remove('hide')
 }
 
 function onDeleteLine() {
+    gLines.splice(gSelected,1)
+    console.log(gLines)  
     clearedCanvas()
     drawImg();
+    setTimeout(() => {
+        renderLines(true)
+    }, 50);
+    if(gSelected===2){
+        gSelected=0
+    }else if(gSelected===1){
+        gSelected=0
+    }else{
+        gSelected=0
+    }
     ////finish later
 }
 
@@ -171,7 +170,7 @@ function renderLines(renderRect) {
         gCtx.beginPath()
         var currLine = gLines[gSelected]
         var width = gCtx.measureText(currLine.txt).width
-        gCtx.rect(currLine.x1, currLine.y1 - currLine.size, width, currLine.size);
+        gCtx.rect(currLine.x1, currLine.y1 - currLine.size, width, currLine.size+10);
         gCtx.stroke();
     }
 }
@@ -185,85 +184,40 @@ function onSelectedLine() {
     console.log(gSelected, 'BEFORE gselected!!!')
     drawImg()
     setTimeout(() => {
-        // gCtx.beginPath()
         renderLines(true)
-        // var currLine = gLines[gSelected]
-        // var width = gCtx.measureText(currLine.txt).width
-        // gCtx.rect(currLine.x1, currLine.y1 - currLine.size, width, currLine.size);
-        // gCtx.stroke();
-        // console.log(currLine.x1, currLine.y1, width, currLine.size);
-
     }, 50);
 
 
 
 }
 
+function onAlign(alignBy) {///not the right way to align
+    clearedCanvas()
+    drawImg()
+    setTimeout(() => {
+        if (alignBy === 'center') {
+            gMeme.align = 'center';
+            gLines.forEach(line => {
+                var widthX = gCtx.measureText(line.txt).width
+                line.x1= (gCanvas.width/2)-(widthX/2)
+                console.log(line.x1)
+            }); 
+        }else if (alignBy === 'right') {
+            gMeme.align = 'right';
+            gLines.forEach(line => {
+                var widthX = gCtx.measureText(line.txt).width
+                line.x1= (gCanvas.width/2)+(gCanvas.width/4)////come back later
+                console.log(line.x1)
+            }); 
+        }else if (alignBy === 'left') {
+            gMeme.align = 'left';
+            gLines.forEach(line => {
+                line.x1= 50;
+                console.log(line.x1)
+            }); 
+        }
+        renderLines(true)
+    }, 50);
+}
 
 
-
-
-
-
-// draw()
-
-// function draw() {
-//     // const offsetX = ev.offsetX
-//     // const offsetY = ev.offsetY
-//     const { offsetX, offsetY } = gCanvas
-//     console.log(offsetX,offsetY,'offsets!!!!')
-//     // console.log(offsetX, offsetY)
-//     // switch (gCurrShape) {
-//     //     case 'triangle':
-//     //         drawTriangle(offsetX, offsetY)
-//     //         break;
-//     //     case 'rect':
-//     //         drawRect(offsetX, offsetY)
-//     //         break;
-//     //     ///can put prompt to read input
-//     //     case 'text':
-//     //         drawText('Puki', offsetX, offsetY)
-//     //         break;
-//     //     case 'line':
-//     //         drawLine(offsetX, offsetY)
-//     //         break;
-//     // }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// <button onclick="onFontSize(2,${gMeme.selectedLineIdx})">+</button>
-//         <button onclick="onFontSize(-2,${gMeme.selectedLineIdx})">-</button>
-//         <button onclick="onSelectedLine()">⬆ ⬇</button>
-//         <button onclick="onUp(${gMeme.selectedLineIdx})">Up⬆</button>
-//         <button onclick="onDown(${gMeme.selectedLineIdx})">Down⬇</button>
-//         <button onclick="clearCanvas()">Clear</button>
-//         <button onclick="clearText()">Clear TXT</button>
-//         <button><a href="#" onclick="onDownload(this)" download="">Download</a></button>
-//         <button onclick="onBack()">back to gallery</button> `
-
-
-
-// function onTopText(idx, value) {
-//     gLines[0] = createLine(value, idx)
-//     drawTxt(gLines[idx].x1, gLines[idx].y1, idx)
-// }
-// function onBottomText(idx, value) {
-//     var newFig = createLine(value, idx)
-//     gLines.splice(1, idx, newFig)
-//     drawTxt(gLines[idx].x1, gLines[idx].y1, idx)
-// }

@@ -31,7 +31,8 @@ var gImgs = [
     { id: 13, url: './imgs/13.jpg' },
     { id: 14, url: './imgs/14.jpg' },
     { id: 15, url: './imgs/15.jpg' },
-    { id: 16, url: './imgs/16.jpg' },
+    { id: 19, url: './imgs/16.jpg' },
+    { id: 17, url: './imgs/17.jpg' },
 ]
 
 var gLines = []
@@ -39,21 +40,21 @@ var gLines = []
 var gMeme = {
     selectedImgId: 5,
     selectedLineIdx: 0,
-    lines: []
+    align:'left',
+    color: 'white',
+
 }
 
 function getLinesForDisplay() {
     return gLines;
 }
 
-function createLine(val, idx) {
+function createLine(val, y) {
     var line = {
         txt: val,
         size: 48,
-        align: 'left',
-        color: 'black',
         x1: 50,
-        y1: 100*idx+100,
+        y1: 150*y+100,
     }
     return line
 }
