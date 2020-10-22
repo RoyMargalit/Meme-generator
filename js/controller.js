@@ -42,13 +42,16 @@ function drawImg() {
 }
 
 function drawText(line) {
-    gCtx.strokeStyle = gLines[0].color///change later by color
+    gCtx.strokeStyle = line.color
     gCtx.fillStyle = 'white'
     gCtx.lineWidth = '2'
-    gCtx.font = `${gLines[0].size}px Impact`
-    // gCtx.textAlign = 'start'
+    gCtx.font = `${line.size}px Impact`
+    gCtx.textAlign = `${line.align}`
+
     gCtx.fillText(line.txt, line.x1, line.y1)
     gCtx.strokeText(line.txt, line.x1, line.y1)
+    // gCtx.rect(textW.width,50,line.x1,line.y1);
+    // gCtx.stroke();
 }
 
 
@@ -62,18 +65,13 @@ function onText(value) {
         gLines.splice(0, 1, createLine(value, 0))
     }
     console.log(gLines, 'gLines')
-    renderLines()
+    drawImg()
+    setTimeout(() => {
+        renderLines(true)
+
+    }, 50);
 }
 
-function onTopText(idx, value) {
-    gLines[0] = createLine(value, idx)
-    drawTxt(gLines[idx].x1, gLines[idx].y1, idx)
-}
-function onBottomText(idx, value) {
-    var newFig = createLine(value, idx)
-    gLines.splice(1, idx, newFig)
-    drawTxt(gLines[idx].x1, gLines[idx].y1, idx)
-}
 
 function drawTxt(x, y, idx) {
     if (gLines[idx].txt === '') drawImg()
@@ -84,7 +82,6 @@ function drawTxt(x, y, idx) {
 function clearCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
     document.querySelector('.top-text').value = ''
-    document.querySelector('.bottom-text').value = ''
 }
 
 
@@ -92,75 +89,62 @@ function clearedCanvas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
 }
 
-////find a way to sent idx
 
-function onFontSize(num, idx) {
-    clearedCanvas()
+
+function onFontSize(num) {
+    // clearedCanvas()
     drawImg();
     setTimeout(function () {
-        // gMeme.lines[0].size += num
-        // gMeme.lines[1].size += num
-        console.log(gSelected)
         gLines[gSelected].size += num
-        renderLines()
-        // drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1)
-        // drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1)
+        gCtx.beginPath()
+        renderLines(true)
     }, 50);
 
 }
 function onUp(idx) {
-    clearedCanvas()
+    // clearedCanvas()
     drawImg();
     setTimeout(function () {
         // gMeme.lines[0].y1 += -10
         // gMeme.lines[1].y1 += -10
         gLines[gSelected].y1 += -10
-        renderLines()
+        gCtx.beginPath()
+        renderLines(true)
         // drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1)
         // drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1)
     }, 50);
 }
 function onDown(idx) {
-    clearedCanvas()
+    // clearedCanvas()
     drawImg();
     setTimeout(function () {
         gLines[gSelected].y1 += +10
         // gMeme.lines[0].y1 += +10
-        renderLines()
+        gCtx.beginPath()
+        renderLines(true)
         // drawText(gMeme.lines[0].txt, gMeme.lines[0].x1, gMeme.lines[0].y1 += 10)
         // drawText(gMeme.lines[1].txt, gMeme.lines[1].x1, gMeme.lines[1].y1 += 10)
 
     }, 50);
 }
 
-
 function onDownload(elLink) {
-    const data = gCanvas.toDataURL()
-    elLink.href = data
-    elLink.download = 'meme.jpg'
+    drawImg()
+    setTimeout(() => {
+        renderLines(false)
+        const data = gCanvas.toDataURL()
+        elLink.href = data
+        elLink.download = 'meme.jpg'
+    }, 50);
 }
 
 function onAddLine() {
+    if (gSelected >= 2) return
     gLines.push('')
+    document.querySelector('.top-text').value = ''
     console.log(gLines, 'glines')
-    var elLine = document.querySelector('.bottom-text')
-    var elBot = document.querySelector('.bot')
-    var strHtml = ''
-    // elLine.classList.remove('hide')
-
-    strHtml += `
-        <input type="text" name="line2" class="bottom-text" oninput="onText(value)" placeholder="Line ${gLines.length}!"></input>
-        <button onclick="onFontSize(2,${gMeme.selectedLineIdx})">+</button>
-        <button onclick="onFontSize(-2,${gMeme.selectedLineIdx})">-</button>
-        <button onclick="onChangeLine()">⬆ ⬇</button>
-        <button onclick="onUp(${gMeme.selectedLineIdx})">Up⬆</button>
-        <button onclick="onDown(${gMeme.selectedLineIdx})">Down⬇</button>
-        <button onclick="clearCanvas()">Clear</button>
-        <button onclick="clearText()">Clear TXT</button>
-        <button><a href="#" onclick="onDownload(this)" download="">Download</a></button>
-        <button onclick="onBack()">back to gallery</button> `
-    elBot.innerHTML += strHtml
     gSelected++
+
 }
 
 function onBack() {
@@ -175,26 +159,111 @@ function onBack() {
 function onDeleteLine() {
     clearedCanvas()
     drawImg();
-
     ////finish later
 }
 
-function renderLines() {
-    // console.log('render lines!')
+function renderLines(renderRect) {
     var lines = getLinesForDisplay()
     lines.forEach(function (line) {
         drawText(line)
     })
+    if (renderRect) {
+        gCtx.beginPath()
+        var currLine = gLines[gSelected]
+        var width = gCtx.measureText(currLine.txt).width
+        gCtx.rect(currLine.x1, currLine.y1 - currLine.size, width, currLine.size);
+        gCtx.stroke();
+    }
 }
 
 
 function onSelectedLine() {
-    if (gSelected >= gLines.length) {
-        gSelected = 0
-        console.log(gSelected,'gselected!!!')
-        return
-    }
-    gMeme.selectedLineIdx = gSelected
     gSelected++
-    console.log(gSelected,'gselected!!!')
+    if (gSelected === 3) {
+        gSelected = 0
+    }
+    console.log(gSelected, 'BEFORE gselected!!!')
+    drawImg()
+    setTimeout(() => {
+        // gCtx.beginPath()
+        renderLines(true)
+        // var currLine = gLines[gSelected]
+        // var width = gCtx.measureText(currLine.txt).width
+        // gCtx.rect(currLine.x1, currLine.y1 - currLine.size, width, currLine.size);
+        // gCtx.stroke();
+        // console.log(currLine.x1, currLine.y1, width, currLine.size);
+
+    }, 50);
+
+
+
 }
+
+
+
+
+
+
+
+// draw()
+
+// function draw() {
+//     // const offsetX = ev.offsetX
+//     // const offsetY = ev.offsetY
+//     const { offsetX, offsetY } = gCanvas
+//     console.log(offsetX,offsetY,'offsets!!!!')
+//     // console.log(offsetX, offsetY)
+//     // switch (gCurrShape) {
+//     //     case 'triangle':
+//     //         drawTriangle(offsetX, offsetY)
+//     //         break;
+//     //     case 'rect':
+//     //         drawRect(offsetX, offsetY)
+//     //         break;
+//     //     ///can put prompt to read input
+//     //     case 'text':
+//     //         drawText('Puki', offsetX, offsetY)
+//     //         break;
+//     //     case 'line':
+//     //         drawLine(offsetX, offsetY)
+//     //         break;
+//     // }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// <button onclick="onFontSize(2,${gMeme.selectedLineIdx})">+</button>
+//         <button onclick="onFontSize(-2,${gMeme.selectedLineIdx})">-</button>
+//         <button onclick="onSelectedLine()">⬆ ⬇</button>
+//         <button onclick="onUp(${gMeme.selectedLineIdx})">Up⬆</button>
+//         <button onclick="onDown(${gMeme.selectedLineIdx})">Down⬇</button>
+//         <button onclick="clearCanvas()">Clear</button>
+//         <button onclick="clearText()">Clear TXT</button>
+//         <button><a href="#" onclick="onDownload(this)" download="">Download</a></button>
+//         <button onclick="onBack()">back to gallery</button> `
+
+
+
+// function onTopText(idx, value) {
+//     gLines[0] = createLine(value, idx)
+//     drawTxt(gLines[idx].x1, gLines[idx].y1, idx)
+// }
+// function onBottomText(idx, value) {
+//     var newFig = createLine(value, idx)
+//     gLines.splice(1, idx, newFig)
+//     drawTxt(gLines[idx].x1, gLines[idx].y1, idx)
+// }
