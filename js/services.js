@@ -54,7 +54,7 @@ function createLine(val, y) {
         txt: val,
         size: 48,
         x1: 50,
-        y1: 150*y+100,
+        y1: 200*y+100,
     }
     return line
 }
