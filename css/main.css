@@ -90,7 +90,7 @@ canvas{
     position: relative;
     display: grid;
     height: 20%;
-    width: 50%;
+    width: 59%;
     /* max-width: 18%; */
     column-gap: 10px;
     padding: 10px;
@@ -98,6 +98,8 @@ canvas{
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: repeat(5,1fr); 
     border: 2px solid black;
+    border-top: none;
+    border-bottom: none;
 }
 
 /* grid items */
@@ -267,6 +269,7 @@ a{
 button{
         background-color: #5e5b52e3; 
         border: none;
+        border-radius: 5px;
         color: black;
         padding: 15px 5px;
         text-align: center;
@@ -279,7 +282,6 @@ button:hover{
     cursor: pointer;
     background-color: peru;
 }
-
 
 /* helper */
 .flex{
@@ -320,15 +322,54 @@ button:hover{
         border:none;
         display: flex;
         flex-direction: column-reverse;
+        background-color: rgb(195 195 195);
     }
     .canvas-container{
         width: 450px;
         height: 450px;
+        margin: 10px;
     }
     canvas{
         width: 450px;
         height: 450px;
-
+        
+    }
+    .grid-container{
+        max-width: 450px;
+        max-height: 650px;
+        min-width: 450px;
+        border: double;
+    }
+    .main-footer{
+        height: 2%;
+    }
+    .navbar {
+        display: flex;
+        overflow: hidden;
+        background-color: #333;
+        font-family: Arial;
+    }
+      
+      /* Links inside the navbar */
+    .navbar a {
+        float: left;
+        font-size: 16px;
+        color: brown;
+        text-align: center;
+        padding: 0px;
+        text-decoration: none;
+    }
+      
+    .main-header .main-nav a {
+        display: flex;
+        padding: 10px;
+        text-shadow: 0 1px 0 #1e1e1e;
+        box-shadow: -1px 0 0 #1d1d1d;
+        height: 40px;
+        width: 50px;
+        color: white;
+        text-decoration: none;
+        justify-content: center;
     }
 
 }
@@ -336,26 +377,114 @@ button:hover{
 
 
 
-@media(max-width:700px) {
-    canvas {
-        width: 250px;
-        height: 250px;
+@media(max-width:600px) {
+    .editor.container {
+        border:none;
+        display: flex;
+        flex-direction: column-reverse;
+        background-color: rgb(195 195 195);
     }
     .canvas-container{
-    border: 1px solid black;
-    background-color: beige;
-    width: 250px;
-    height: 250px;
-    display: relative;
-    margin: 0 auto;
+        width: 350px;
+        height: 350px;
+        margin: 10px;
     }
-    .editor{
-    display: relative;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    background-color: blueviolet;
+    canvas{
+        width: 350px;
+        height: 350px;
+        
     }
+    .grid-container{
+        font-family: cursive;
+        position: relative;
+        display: grid;
+        height: 20%;
+        width: 100%;
+        column-gap: 10px;
+        min-width: 340px;
+        padding: 10px;
+        row-gap: 10px;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 0.5fr;
+        grid-template-columns: repeat(5,1fr);
+        border: none;
+    }
+    h2{
+        display: none;
+    }
+    /* .item0{
+        grid-column: 1/-1;
+    
+    } */
+    .item1{
+        grid-column: 1/-1;
+        grid-row-start: 1;
+        background-color: rgba(231, 226, 248, 0.904);
+    }
+    .item2{
+        grid-column: 1;
+        grid-row-start: 2;
+    }
+    .item3{
+        grid-column: 2;
+        grid-row-start: 2;
+    }
+    .item4{
+        grid-column: 3;
+        grid-row-start: 2;
+    }
+    .item5{
+        grid-column: 4;
+        grid-row-start: 2;
+    }
+    .item6{
+        grid-column: 5;
+        grid-row-start: 2;
+    }
+    .item7{
+        grid-column: 1;
+        grid-row-start: 3;
+    }
+    .item8{
+        grid-column: 2;
+        grid-row-start: 3;
+    }
+    .item9{
+        grid-column: 3;
+        grid-row-start: 3;
+    }
+    .item10{
+        grid-column: 4;
+        grid-row-start: 3;
+    }
+    .item11{
+        grid-column: 5;
+        grid-row-start: 3;
+    }
+    .item12{
+        grid-column: 1/4;
+        grid-row-start: 4;
+    }
+    .item13{
+        grid-column: 4/6;
+        grid-row-start: 4;
+    }
+    .item14{
+        grid-column: 1;
+        grid-row-start: 5;
+    }
+    .item15{
+        grid-column:2/4 ;
+        grid-row-start: 5;
+    }
+    .item16{
+        grid-column:4/6 ;
+        grid-row-start: 5;
+    }
+
+
+
+
+
     .navbar {
         display: flex;
         overflow: hidden;
