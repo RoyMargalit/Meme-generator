@@ -49,12 +49,12 @@
                 <button onclick="onAlign('center')" class="item10"><i class="fa fa-align-center"></i></button>
                 <button onclick="onAlign('right')" class="item11"><i class="fa fa-align-right"></i></button>
                 
-                <select name="fonts" id="font" class="item12">
-                    <option value="Courier New">Courier</option>
+                <select name="fonts" id="font" onchange="onChangeFont(value)" class="item12">
+                    <option value=" Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">Impact</option>
                     <option value="Times New Roman">Times New Roman</option>
                     <option value="cursive">cursive</option>
                   </select>
-                <button  class="item13" ><input type="color"></button>
+                <button  class="item13"><input type="color" oninput="onChangeColor(value)"></button>
 
                 <button onclick="clearCanvas()" class="item14">Clear</button>
                 <button class="item15"><a href="#" onclick="onDownload(this)"  download=""><i class="fa fa-download"></i>Download</a></button>
@@ -66,7 +66,26 @@
         </div>
     </div>
 
-    <section class="gallery-container container"> </section>
+    <div class="search container">
+    <h3>Choose your photo   :</h3>
+
+                <input list="search-datalist" name="search-datalist" id="search" type="txt" class="search-words" oninput="searchImg()" placeholder="Type a category...">
+                <datalist id="search-datalist">
+                  <option value="happy">
+                  <option value="pets">
+                  <option value="baby">
+                  <option value="movie">
+                  <option value="funny">
+                  <option value="sports">
+                  <option value="cat">
+                </datalist>
+            </div>
+        </div>
+    <section class="gallery-container container"> 
+
+    </section>
+
+
     <footer class="main-footer">Created by Roy Margalit </footer>
     <script src="js/services.js"></script>
     <script src="js/controller.js"></script>

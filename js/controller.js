@@ -9,9 +9,15 @@ function onInit() {
     init()
 }
 
+function searchImg() {
+    renderGallery();
+}
+
+
 function renderGallery() {
     var strHtml = ''
-    gImgs.forEach(image => {
+    var imgs=getImgsForDisplay()
+    imgs.forEach(image => { 
         strHtml += `<img src= "${image.url}" onclick="renderEditor(${image.id})" class= "img${image.id}"></img>`
     });
     var image = document.querySelector('.gallery-container')
@@ -25,6 +31,8 @@ function renderEditor(imageId) {
     elCan.classList.remove('hide')
     var elGallery = document.querySelector('.gallery-container')
     elGallery.classList.add('hide')
+    var elSearch=document.querySelector('.search')
+    elSearch.classList.add('hide')
     getImg(imageId)
 }
 
@@ -42,10 +50,10 @@ function drawImg() {
 }
 
 function drawText(line) {
-    gCtx.strokeStyle = line.color
-    gCtx.fillStyle = `${gMeme.color}`
+    gCtx.strokeStyle = 'black'
+    gCtx.fillStyle = `${line.color}`
     gCtx.lineWidth = '2'
-    gCtx.font = `${line.size}px Impact`
+    gCtx.font = `${line.size}px ${gMeme.font}`
     gCtx.textAlign = `left`///should not be like this come back if u have time
 
     gCtx.fillText(line.txt, line.x1, line.y1)
@@ -141,6 +149,8 @@ function onBack() {
     elCan.classList.add('hide') 
     var elGallery = document.querySelector('.gallery-container')
     elGallery.classList.remove('hide')
+    var elSearch=document.querySelector('.search')
+    elSearch.classList.remove('hide')
 }
 
 function onDeleteLine() {
@@ -220,4 +230,25 @@ function onAlign(alignBy) {///not the right way to align
     }, 50);
 }
 
+function onChangeColor(val){
+    // var color=document.querySelector('.item13').value
+    console.log(val)
+    gLines[gSelected].color=val
+    clearedCanvas()
+    drawImg()
+    setTimeout(() => {
+        renderLines(true)
+        
+    }, 50);
+}
+function onChangeFont(val){
+    console.log(val)
+    gMeme.font=val
+    clearedCanvas()
+    drawImg()
+    setTimeout(() => {
+        renderLines(true)
+        
+    }, 50);
+}
 
