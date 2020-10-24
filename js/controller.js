@@ -144,7 +144,7 @@ function onAddLine() {
     document.querySelector('.top-text').value = ''
     console.log(gLines, 'glines')
     gSelected++
-    
+
 }
 
 function onBack() {
@@ -156,7 +156,7 @@ function onBack() {
     elGallery.classList.remove('hide')
     var elSearch = document.querySelector('.search')
     elSearch.classList.remove('hide')
-    gLines=[]
+    gLines = []
     document.querySelector('.top-text').value = ''
 }
 
@@ -323,8 +323,8 @@ function myDown(e) {
         var r = gLines[i];
         var width = parseInt(gCtx.measureText(r.txt).width)
 
-        if (mx > r.x1 && mx < r.x1 + width && my > r.y1-r.size && my < r.y1 ) {
-            console.log('AFTER condition','i:', i, r.x1, my, r.y1)
+        if (mx > r.x1 && mx < r.x1 + width && my > r.y1 - r.size && my < r.y1) {
+            console.log('AFTER condition', 'i:', i, r.x1, my, r.y1)
             // if yes, set that rects isDragging=true
             dragok = true;
             r.isDragging = true;
@@ -363,12 +363,12 @@ function myMove(e) {
         // get the current mouse position
         var mx = parseInt(e.clientX - offsetX);
         var my = parseInt(e.clientY - offsetY);
-        
+
         // calculate the distance the mouse has moved
         // since the last mousemove
         var dx = mx - startX;
         var dy = my - startY;
-        console.log('my move',mx,my,dx,dy)
+        console.log('my move', mx, my, dx, dy)
 
         // move each rect that isDragging 
         // by the distance the mouse has moved
@@ -377,22 +377,42 @@ function myMove(e) {
             var r = gLines[i];
             if (r.isDragging) {
                 console.log('mymove in for')
-                console.log(gLines[i].x1,gLines[i].y1 ,'before')
+                console.log(gLines[i].x1, gLines[i].y1, 'before')
                 r.x1 += dx;
                 r.y1 += dy;
-                console.log(gLines[i].x1,gLines[i].y1,'after')
+                console.log(gLines[i].x1, gLines[i].y1, 'after')
             }
-            console.log(startY,'startY')
+            console.log(startY, 'startY')
         }
 
         // redraw the scene with the new rect positions 
         drawImg()
         renderLines(true)
-        
+
         // reset the starting mouse position for the next mousemove
         startX = mx;
         startY = my;
 
     }
 }
+
+
+var bannerImage = document.getElementById('meme-canvas');
+var imgData = getBase64Image(bannerImage);
+localStorage.setItem("imgData", imgData);
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    
+}
+
 
