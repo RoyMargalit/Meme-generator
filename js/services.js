@@ -73,7 +73,8 @@ function createLine(val, y) {
         size: 48,
         x1: 50,
         y1: 200*y+100,
-        color:'white'
+        color:'white',
+        isDragging:false,
     }
     return line
 }

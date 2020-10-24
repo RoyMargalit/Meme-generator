@@ -4,8 +4,8 @@
 
 body{
     height: 100vh;
-    background-color: rgb(160, 163, 162);
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    background-color: white;
+    font-family: monospace;
 }
 
 img{
@@ -42,7 +42,7 @@ canvas{
 .gallery-container img{
     flex-wrap: wrap;
     margin: 5px;
-    border: 2px solid black;
+    border: 4px solid rgb(197, 196, 196);
     border-radius: 20px;
     opacity: 0.8;
     -webkit-box-shadow: 10px 10px 17px -7px rgba(0,0,0,0.75);
@@ -56,11 +56,12 @@ canvas{
     opacity: 1;
 }
 .editor{
+    margin-top: 20%;
+    /* padding: 20%; */
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
-    background-color: rgb(241, 252, 210);
     margin: 20px;
     /* height: 100%; */
     
@@ -90,7 +91,9 @@ canvas{
 
 .search h3{
     /* padding: 10px; */
-    font-size: 30px;
+    color: rgb(0, 0, 0);
+    font-family:monospace;
+    font-size: 35px;
     margin: 0;
     margin-right: 20px;
     padding-left: 70px;
@@ -101,6 +104,8 @@ canvas{
 }
 
 .control-box{
+    /* color: wheat; */
+    background-color: powderblue;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -108,8 +113,11 @@ canvas{
 }
 .grid-container h2{
     color: rgb(29, 28, 28);
+    font-family: monospace;
+    font-size: 30px;
 }
 .grid-container{
+    background-color:lightgrey;
     font-family: cursive;
     position: relative;
     display: grid;
@@ -155,34 +163,42 @@ canvas{
 .item6{
     grid-column: 5;
     grid-row-start: 3;
+    
 }
 .item7{
     grid-column: 1;
     grid-row-start: 4;
+    background-color: rgb(173, 135, 132);
 }
 .item8{
     grid-column: 2;
     grid-row-start: 4;
+    background-color: rgb(173, 135, 132);
 }
 .item9{
     grid-column: 3;
     grid-row-start: 4;
+    background-color: rgb(173, 135, 132);
 }
 .item10{
     grid-column: 4;
     grid-row-start: 4;
+    background-color: rgb(173, 135, 132);
 }
 .item11{
     grid-column: 5;
     grid-row-start: 4;
+    background-color: rgb(173, 135, 132);
 }
 .item12{
     grid-column: 1/4;
     grid-row-start: 5;
+    background-color: rgb(173, 135, 132);
 }
 .item13{
     grid-column: 4/6;
     grid-row-start: 5;
+    background-color: rgb(173, 135, 132);
 }
 .item14{
     grid-column: 1;
@@ -205,7 +221,7 @@ canvas{
 .header-container{
     /* height: 100%; */
     width: 100%;
-    background-color: #292929;
+    background-color: #5a5a5a;
 
 }
 
@@ -228,18 +244,21 @@ a{
 .main-footer{
     position: fixed;
     bottom: 0%;
-    height: 5%;
+    height: 3%;
     width: 100%;
-    background-color: #292929;
+    font-size: 1.5rem;
+    background-color: #5A5A5A;
     text-align: center;
     color: wheat;
+    margin: 0;
 }
 
 
 .logo-text{
     color: #ffffff;
-    font-size: 40px;
-    font-family: cursive;
+    font-size: 60px;
+    margin:30px;
+    font-family:monospace;
 }
 
 
@@ -254,13 +273,14 @@ a{
 .navbar a {
     float: left;
     font-size: 16px;
-    color: brown;
+    /* color: rgb(253, 22, 22); */
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
   
 .main-header .main-nav a {
+    font-size: 20px;
     display: flex;
     padding: 10px;
     text-shadow: 0 1px 0 #1e1e1e;
@@ -274,8 +294,8 @@ a{
 
 
 .main-header .main-nav a:hover{
-    color: #a05e14;
-    box-shadow: -1px 0 0 #1d1d1d, inset 0 -6px 0 #a05e14;
+    color: #c9c9c9;
+    box-shadow: -1px 0 0 #1d1d1d, inset 0 -6px 0 #c9c9c9;
 }
 
 
@@ -292,6 +312,7 @@ a{
 
 button{
         background-color: #5e5b52e3; 
+        font-size: 20px;
         border: none;
         border-radius: 5px;
         color: black;
@@ -304,7 +325,7 @@ button{
 
 button:hover{
     cursor: pointer;
-    background-color: peru;
+    background-color: rgb(145, 149, 150);
 }
 
 /* helper */
@@ -339,7 +360,7 @@ button:hover{
 
 @media(max-width:1250px){
     body{
-    background-color: rgb(33, 66, 33);
+    /* background-color: rgb(33, 66, 33); */
 
     }  
     .editor.container {
@@ -368,6 +389,7 @@ button:hover{
         height: 2%;
     }
     .navbar {
+        
         display: flex;
         overflow: hidden;
         background-color: #333;
@@ -376,6 +398,7 @@ button:hover{
       
       /* Links inside the navbar */
     .navbar a {
+        
         float: left;
         font-size: 16px;
         color: brown;
@@ -391,11 +414,16 @@ button:hover{
         box-shadow: -1px 0 0 #1d1d1d;
         height: 40px;
         width: 50px;
+        
         color: white;
         text-decoration: none;
         justify-content: center;
     }
-
+    .menu-open .main-header .main-nav{
+        background-color: rgb(145, 149, 150);
+    }
+    .menu-open .main-header .main-nav a :hover{
+        background-color: rgb(173, 135, 132);
 }
 
 
@@ -409,6 +437,7 @@ button:hover{
         background-color: wheat;
     }
     .canvas-container{
+        /* object-fit: cover; */
         width: 350px;
         height: 350px;
         margin: 10px;
@@ -442,7 +471,7 @@ button:hover{
     .item1{
         grid-column: 1/-1;
         grid-row-start: 1;
-        background-color: rgba(231, 226, 248, 0.904);
+        background-color: rgba(174, 174, 175, 0.904);
     }
     .item2{
         grid-column: 1;
@@ -504,7 +533,9 @@ button:hover{
         grid-column:4/6 ;
         grid-row-start: 5;
     }
-
+    .header-btn{
+        display: block;
+    } 
 
 
 
@@ -518,6 +549,7 @@ button:hover{
       
       /* Links inside the navbar */
     .navbar a {
+        /* display: none; */
         float: left;
         font-size: 16px;
         color: brown;
@@ -525,9 +557,24 @@ button:hover{
         padding: 0px;
         text-decoration: none;
     }
-      
+    
+    .main-header .main-nav{
+        position: fixed;
+        z-index: 10;
+        top:0;
+        right: 0;
+        height: 300px;
+        border: none;
+        flex-direction: column;
+        width: 200px;
+        transform: translateX(100%);
+        transition: transform .8s;
+        
+    }
     .main-header .main-nav a {
-        display: flex;
+        font-size: 20px;
+        font-family: monospace;
+        display: none;
         padding: 10px;
         text-shadow: 0 1px 0 #1e1e1e;
         box-shadow: -1px 0 0 #1d1d1d;
@@ -537,7 +584,30 @@ button:hover{
         text-decoration: none;
         justify-content: center;
     }
+    .menu-open .main-header .main-nav{
+        
+            transform: translateX(-48%);
+            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
     
+        }
+    .main-header .main-nav a{
+            display: flex;
+            padding: 10px;
+            text-shadow:none;
+            box-shadow:none;
+            max-width: 730px; ;
+    }
+    .main-header .main-nav a:hover{
+        color: white;
+        /* color: #58c93a; */
+        /* box-shadow: 0px 0 0 #1d1d1d, inset 0 -6px 0 #58c93a */
+    }
+    .main-footer{
+        display: none;
+    }
+}
 
 
 

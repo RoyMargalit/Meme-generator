@@ -18,10 +18,11 @@
                 <li>
                     <div class="navbar flex">
                 </li>
-                <li><a href=# class="flex align-center">About</a></li>
+                <li><a href=#gallery-container onclick="onBack()" class="flex align-center">Gallery</a></li>
                 <li><a href=# class="flex align-center">Work</a></li>
                 <li><a href=# class="flex align-center">Contact</a></li>
             </ul>
+            <button class="header-btn hide" onclick="toggleMenu()">☰</button>
 
         </div>
     </header>
@@ -67,7 +68,7 @@
     </div>
 
     <div class="search container">
-    <h3>Choose your photo   :</h3>
+    <h3>Choose your photo:</h3>
 
                 <input list="search-datalist" name="search-datalist" id="search" type="txt" class="search-words" oninput="searchImg()" placeholder="Type a category...">
                 <datalist id="search-datalist">
@@ -88,6 +89,7 @@
 
     <footer class="main-footer">Created by Roy Margalit </footer>
     <script src="js/services.js"></script>
+    <!-- <script src="js/drag-util.js"></script> -->
     <script src="js/controller.js"></script>
 </body>
 
