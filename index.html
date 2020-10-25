@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meme generator</title>
-    <link rel="stylesheet" href="css/main.css">
-    <script src="https://kit.fontawesome.com/b540f94807.js" crossorigin="anonymous"></script>
-
-</head>
-
-<body onload="onInit()">
-    <header class="main-header">
-        <div class="header-container flex space-between align-center">
-            <div class="logo-text flex space-between align-center">MEMES </div>
-            <ul class="main-nav flex clean-list align-center justify-center">
-                <li>
-                    <div class="navbar flex">
-                </li>
-                <li><a href=#gallery-container onclick="onBack()" class="flex align-center">Gallery</a></li>
-                <!-- <li><a href=saved.html class="flex align-center">Saved</a></li>
-                <li><a href=# class="flex align-center">Contact</a></li> -->
-            </ul>
-            <button class="header-btn hide" onclick="toggleMenu()">☰</button>
-
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Meme generator</title>
+        <link rel="stylesheet" href="css/main.css">
+        <script src="https://kit.fontawesome.com/b540f94807.js" crossorigin="anonymous"></script>
+        
+    </head>
+    
+    <body onload="onInit()">
+        <header class="main-header">
+            <div class="header-container flex space-between align-center">
+                <div class="logo-text flex space-between align-center" onclick="onBack()">MEMES </div>
+                <ul class="main-nav flex clean-list align-center justify-center">
+                    <li>
+                        <button class="header-btn modal-btn hide" onclick="toggleMenu()">&times;</button>
+                        <div class="navbar flex">
+                        </li>
+                        <li><a href=#gallery-container onclick="onBack()" class="flex align-center">Gallery</a></li>
+                        <!-- <li><a href=saved.html class="flex align-center">Saved</a></li>
+                            <li><a href=# class="flex align-center">Contact</a></li> -->
+                        </ul>
+                        <button class="header-btn hide" onclick="toggleMenu()">☰</button>
+                        
         </div>
     </header>
-
-
-
 
     <!-- should do on input so as clicks it changes -->
     <div class="editor container">
@@ -39,26 +37,47 @@
                 <input type="text" name="line1" class="top-text item1" class="input1" oninput="onText(value)"
                     placeholder="Insert line!"></input>
                 <button onclick="onAddLine()" class="item2">Add Line</button>
-                <button onclick="onUp()" class="item3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M322.9 304H125.1c-10.7 0-16.1-13-8.5-20.5l98.9-98.3c4.7-4.7 12.2-4.7 16.9 0l98.9 98.3c7.7 7.5 2.3 20.5-8.4 20.5zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg></button>
-                <button onclick="onDown()" class="item4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M125.1 208h197.8c10.7 0 16.1 13 8.5 20.5l-98.9 98.3c-4.7 4.7-12.2 4.7-16.9 0l-98.9-98.3c-7.7-7.5-2.3-20.5 8.4-20.5zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg></button>
+                <button onclick="onUp()" class="item3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                        <path
+                            d="M322.9 304H125.1c-10.7 0-16.1-13-8.5-20.5l98.9-98.3c4.7-4.7 12.2-4.7 16.9 0l98.9 98.3c7.7 7.5 2.3 20.5-8.4 20.5zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z" />
+                        </svg></button>
+                <button onclick="onDown()" class="item4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                        <path
+                            d="M125.1 208h197.8c10.7 0 16.1 13 8.5 20.5l-98.9 98.3c-4.7 4.7-12.2 4.7-16.9 0l-98.9-98.3c-7.7-7.5-2.3-20.5 8.4-20.5zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z" />
+                        </svg></button>
                 <button onclick="onSelectedLine()" class="item5">⬆ ⬇</button>
-                <button onclick="onDeleteLine()" class="item6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z"/></svg></button>
-                
-                <button onclick="onFontSize(2)" class="item7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M352 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm96-160v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg></button>
-                <button onclick="onFontSize(-2)" class="item8"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M108 284c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h232c6.6 0 12 5.4 12 12v32c0 6.6-5.4 12-12 12H108zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg></button>
+                <button onclick="onDeleteLine()" class="item6"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512">
+                        <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                        <path
+                            d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z" />
+                        </svg></button>
+                <button onclick="onFontSize(2)" class="item7"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512">
+                        <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                        <path
+                            d="M352 240v32c0 6.6-5.4 12-12 12h-88v88c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-88h-88c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h88v-88c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v88h88c6.6 0 12 5.4 12 12zm96-160v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z" />
+                        </svg></button>
+                <button onclick="onFontSize(-2)" class="item8"><svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 448 512">
+                        <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                        <path
+                            d="M108 284c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h232c6.6 0 12 5.4 12 12v32c0 6.6-5.4 12-12 12H108zM448 80v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zm-48 346V86c0-3.3-2.7-6-6-6H54c-3.3 0-6 2.7-6 6v340c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z" />
+                        </svg></button>
                 <button onclick="onAlign('left')" class="item9"> <i class="fa fa-align-left"></i></button></button>
                 <button onclick="onAlign('center')" class="item10"><i class="fa fa-align-center"></i></button>
                 <button onclick="onAlign('right')" class="item11"><i class="fa fa-align-right"></i></button>
-                
-                <select name="fonts" id="font" onchange="onChangeFont(value)" class="item12">
+                <select name="fonts" id="font" onchange="onChangeFont(value)" class="item12 font-input">
                     <option value=" Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">Impact</option>
                     <option value="Times New Roman">Times New Roman</option>
                     <option value="cursive">cursive</option>
-                  </select>
-                <button  class="item13"><input type="color" oninput="onChangeColor(value)"></button>
-
+                </select>
+                <button class="item13"><input type="color" oninput="onChangeColor(value)"></button>
                 <button onclick="clearCanvas()" class="item14">Clear</button>
-                <button class="item15"><a href="#" onclick="onDownload(this)"  download=""><i class="fa fa-download"></i>Download</a></button>
+                <button class="item15"><a href="#" onclick="onDownload(this)" download="meme.jpeg"><i
+                            class="fa fa-download"></i>Download</a></button>
                 <button onclick="onBack()" class="item16">Back to gallery</button>
         </div>
         </section>
@@ -66,27 +85,24 @@
             <canvas id="meme-canvas" height="600" width="600"></canvas>
         </div>
     </div>
-
     <div class="search container">
-    <h3>Choose your photo:</h3>
+        <h3>Choose your photo:</h3>
 
-                <input list="search-datalist" name="search-datalist" id="search" type="txt" class="search-words" oninput="searchImg()" placeholder="Type a category...">
-                <datalist id="search-datalist">
-                  <option value="happy">
-                  <option value="pets">
-                  <option value="baby">
-                  <option value="movie">
-                  <option value="funny">
-                  <option value="sports">
-                  <option value="cat">
-                </datalist>
-            </div>
-        </div>
-    <section class="gallery-container container"> 
-
+        <input list="search-datalist" name="search-datalist" id="search" type="txt" class="search-words"
+            oninput="searchImg()" placeholder="Type a category...">
+        <datalist id="search-datalist">
+            <option value="happy">
+            <option value="pets">
+            <option value="baby">
+            <option value="movie">
+            <option value="funny">
+            <option value="sports">
+            <option value="cat">
+        </datalist>
+    </div>
+    </div>
+    <section class="gallery-container container">
     </section>
-
-
     <footer class="main-footer">Created by Roy Margalit </footer>
     <script src="js/services.js"></script>
     <!-- <script src="js/drag-util.js"></script> -->

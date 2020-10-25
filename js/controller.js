@@ -3,13 +3,11 @@ var gCanvas = document.querySelector('#meme-canvas');
 var gCtx = gCanvas.getContext('2d');
 var gIdx = 0
 var gSelected = 0
-
-
-
-
+var gIsDragged;
 
 function onInit() {
     renderGallery()
+    // window.addEventListener('resize', resizeEditor);
     init()
 }
 
@@ -46,11 +44,12 @@ function getImg(imgId) {
     gMeme.selectedImgId = imgId
     drawImg()
 }
-function drawImg() {
+function drawImg(isRect=true) {
     var img = new Image()
     img.src = `./imgs/${gMeme.selectedImgId}.jpg`;
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+        renderLines(isRect)
     }
 }
 
@@ -74,18 +73,14 @@ function onText(value) {
         gLines.splice(0, 1, createLine(value, 0))
     }
     console.log(gLines, 'gLines')
-    drawImg()
-    setTimeout(() => {
-        renderLines(true)
+    drawImg(true)
+    // setTimeout(() => {
+    //     renderLines(true)
 
-    }, 50);
+    // }, 50);
 }
 
 
-function drawTxt(x, y, idx) {
-    if (gLines[idx].txt === '') drawImg()
-    drawText(gLines[idx].txt, gLines[idx].x1, gLines[idx].y1)
-}
 
 
 function clearCanvas() {
@@ -101,41 +96,31 @@ function clearedCanvas() {
 
 function onFontSize(num) {
     // clearedCanvas()
-    drawImg();
-    setTimeout(function () {
-        gLines[gSelected].size += num
-        gCtx.beginPath()
-        renderLines(true)
-    }, 50);
+    gLines[gSelected].size += num
+    gCtx.beginPath()
+    drawImg(true);
 
 }
-function onUp(idx) {
+function onUp() {
     // clearedCanvas()
-    drawImg();
-    setTimeout(function () {
-        gLines[gSelected].y1 += -10
-        gCtx.beginPath()
-        renderLines(true)
-    }, 50);
+    gLines[gSelected].y1 += -10
+    gCtx.beginPath()
+    drawImg(true);
 }
-function onDown(idx) {
-    drawImg();
-    setTimeout(function () {
-        gLines[gSelected].y1 += +10
-        gCtx.beginPath()
-        renderLines(true)
-
-    }, 50);
+function onDown() {
+    gLines[gSelected].y1 += +10
+    gCtx.beginPath()
+    drawImg(true);
 }
 
 function onDownload(elLink) {
-    drawImg()
+    drawImg(false)
     setTimeout(() => {
         renderLines(false)
         const data = gCanvas.toDataURL()
         elLink.href = data
         elLink.download = 'meme.jpg'
-    }, 150);
+    }, 500);
 }
 
 function onAddLine() {
@@ -158,6 +143,7 @@ function onBack() {
     elSearch.classList.remove('hide')
     gLines = []
     document.querySelector('.top-text').value = ''
+    document.querySelector('body').classList.remove('menu-open')
 }
 
 function onDeleteLine() {
@@ -210,7 +196,7 @@ function onSelectedLine() {
 
 function onAlign(alignBy) {///not the right way to align
     clearedCanvas()
-    drawImg()
+    // drawImg()
     setTimeout(() => {
         if (alignBy === 'center') {
             gMeme.align = 'center';
@@ -223,7 +209,7 @@ function onAlign(alignBy) {///not the right way to align
             gMeme.align = 'right';
             gLines.forEach(line => {
                 var widthX = gCtx.measureText(line.txt).width
-                line.x1 = (gCanvas.width / 2) + (gCanvas.width / 4)////come back later
+                line.x1 = (gCanvas.width / 2) + (gCanvas.width / 8)////come back later
                 console.log(line.x1)
             });
         } else if (alignBy === 'left') {
@@ -233,7 +219,7 @@ function onAlign(alignBy) {///not the right way to align
                 console.log(line.x1)
             });
         }
-        renderLines(true)
+        drawImg()
     }, 50);
 }
 
@@ -241,22 +227,13 @@ function onChangeColor(val) {
     // var color=document.querySelector('.item13').value
     console.log(val)
     gLines[gSelected].color = val
-    clearedCanvas()
+    // clearedCanvas()
     drawImg()
-    setTimeout(() => {
-        renderLines(true)
-
-    }, 50);
 }
 function onChangeFont(val) {
     console.log(val)
     gMeme.font = val
-    clearedCanvas()
     drawImg()
-    setTimeout(() => {
-        renderLines(true)
-
-    }, 50);
 }
 
 
@@ -278,7 +255,6 @@ var WIDTH;
 var HEIGHT;
 
 function dragVar() {
-
     // canvas = document.getElementById("meme-canvas");
     console.log(gCanvas)
     ctx = gCanvas.getContext("2d");
@@ -320,14 +296,14 @@ function myDown(e) {
     // test each rect to see if mouse is inside
     dragok = false;
     for (var i = 0; i < gLines.length; i++) {
-        var r = gLines[i];
-        var width = parseInt(gCtx.measureText(r.txt).width)
+        var currLine = gLines[i];
+        var width = parseInt(gCtx.measureText(currLine.txt).width)
 
-        if (mx > r.x1 && mx < r.x1 + width && my > r.y1 - r.size && my < r.y1) {
-            console.log('AFTER condition', 'i:', i, r.x1, my, r.y1)
+        if (mx > currLine.x1 && mx < currLine.x1 + width && my > currLine.y1 - currLine.size && my < currLine.y1) {
+            console.log('AFTER condition', 'i:', i, currLine.x1, my, currLine.y1)
             // if yes, set that rects isDragging=true
             dragok = true;
-            r.isDragging = true;
+            currLine.isDragging = true;
         }
     }
     // save the current mouse position
@@ -374,12 +350,12 @@ function myMove(e) {
         // by the distance the mouse has moved
         // since the last mousemove
         for (var i = 0; i < gLines.length; i++) {
-            var r = gLines[i];
-            if (r.isDragging) {
+            var currLine = gLines[i];
+            if (currLine.isDragging) {
                 console.log('mymove in for')
                 console.log(gLines[i].x1, gLines[i].y1, 'before')
-                r.x1 += dx;
-                r.y1 += dy;
+                currLine.x1 += dx;
+                currLine.y1 += dy;
                 console.log(gLines[i].x1, gLines[i].y1, 'after')
             }
             console.log(startY, 'startY')
@@ -395,4 +371,29 @@ function myMove(e) {
 
     }
 }
+
+
+
+
+
+function resizeCanvas() {///come back
+    const elContainer = document.querySelector('.canvas-container');
+    gCanvas.width = elContainer.offsetWidth;
+    gCanvas.height = gCanvas.width;
+    setCanvasSizes(gCanvas.width);
+    drawImg();
+    drawText();
+}
+
+// function resizeEditor() {
+//     const elEditor = document.querySelector('.editor');
+//     elEditor.style.height = gCanvas.height + 'px';
+
+
+// window.addEventListener('resize', resizeCanvas);
+
+// }
+
+
+
 

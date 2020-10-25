@@ -79,16 +79,14 @@ function createLine(val, y) {
     return line
 }
 
-
-
-
-
-
-
-
-
-
-
+function setCanvasSizes(width) {
+    gLines.forEach((line, idx) => {
+        line.x1 = width / 2;
+        if (idx === 0) line.y1 = width / 4;
+        else if (idx === 1) line.y1 = width - (width / 4) + line.size;
+        else line.y1 = width / 2 + line.size / 2;
+    });
+}
 
 
 

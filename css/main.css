@@ -3,6 +3,7 @@
 }
 
 body{
+    margin: 0;
     height: 100vh;
     background-color: white;
     font-family: monospace;
@@ -56,6 +57,7 @@ canvas{
     opacity: 1;
 }
 .editor{
+
     margin-top: 20%;
     /* padding: 20%; */
     display: flex;
@@ -63,16 +65,13 @@ canvas{
     text-align: center;
     justify-content: center;
     margin: 20px;
-    /* height: 100%; */
     
 }
 .editor.container{
-    border: 2px solid black;
     border-top: none;
 
 }
 .container{
-    /* display: flex; */
     margin: 0 auto;
     max-width: 1200px;
 }
@@ -90,7 +89,6 @@ canvas{
 }
 
 .search h3{
-    /* padding: 10px; */
     color: rgb(0, 0, 0);
     font-family:monospace;
     font-size: 35px;
@@ -104,8 +102,7 @@ canvas{
 }
 
 .control-box{
-    /* color: wheat; */
-    background-color: powderblue;
+    background-color:#e3e3e3;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -117,19 +114,18 @@ canvas{
     font-size: 30px;
 }
 .grid-container{
-    background-color:lightgrey;
+    /* background-color:lightgrey; */
     font-family: cursive;
     position: relative;
     display: grid;
     height: 20%;
     width: 59%;
-    /* max-width: 18%; */
     column-gap: 10px;
     padding: 10px;
     row-gap: 10px;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(6,1fr);
     grid-template-columns: repeat(5,1fr); 
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-top: none;
     border-bottom: none;
 }
@@ -143,6 +139,9 @@ canvas{
     grid-column: 1/-1;
     grid-row-start: 2;
     background-color: rgba(231, 226, 248, 0.904);
+}
+.item1:focus{
+    background-color: ivory;
 }
 .item2{
     grid-column: 1;
@@ -194,11 +193,14 @@ canvas{
     grid-column: 1/4;
     grid-row-start: 5;
     background-color: rgb(173, 135, 132);
+    border-radius: 12px;
+    background-color: #ffffff;
 }
 .item13{
     grid-column: 4/6;
     grid-row-start: 5;
     background-color: rgb(173, 135, 132);
+    
 }
 .item14{
     grid-column: 1;
@@ -221,7 +223,8 @@ canvas{
 .header-container{
     /* height: 100%; */
     width: 100%;
-    background-color: #5a5a5a;
+    height: 130px;
+    background-color: #ff7f00;
 
 }
 
@@ -247,12 +250,15 @@ a{
     height: 3%;
     width: 100%;
     font-size: 1.5rem;
-    background-color: #5A5A5A;
+    background-color: #ff7f00;
     text-align: center;
     color: wheat;
-    margin: 0;
+    margin: 0 au;
 }
 
+.logo-text:hover{
+    cursor: pointer;
+}
 
 .logo-text{
     color: #ffffff;
@@ -321,6 +327,7 @@ button{
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+        
 }
 
 button:hover{
@@ -367,7 +374,7 @@ button:hover{
         border:none;
         display: flex;
         flex-direction: column-reverse;
-        background-color: rgb(195 195 195);
+        background-color: #e3e3e3;
     }
     .canvas-container{
         width: 450px;
@@ -381,9 +388,9 @@ button:hover{
     }
     .grid-container{
         max-width: 450px;
-        max-height: 650px;
+        /* max-height: 650px; */
         min-width: 450px;
-        border: double;
+        /* border: double; */
     }
     .main-footer{
         height: 2%;
@@ -401,7 +408,6 @@ button:hover{
         
         float: left;
         font-size: 16px;
-        color: brown;
         text-align: center;
         padding: 0px;
         text-decoration: none;
@@ -411,10 +417,8 @@ button:hover{
         display: flex;
         padding: 10px;
         text-shadow: 0 1px 0 #1e1e1e;
-        box-shadow: -1px 0 0 #1d1d1d;
-        height: 40px;
-        width: 50px;
-        
+        box-shadow: -1px 0 0 #ececec;
+        width: 100px;
         color: white;
         text-decoration: none;
         justify-content: center;
@@ -424,27 +428,39 @@ button:hover{
     }
     .menu-open .main-header .main-nav a :hover{
         background-color: rgb(173, 135, 132);
+    }
+    .container{
+        max-width: 600px;
+    }
+    .main-footer{
+        height: 3%;
+        /* background-color: #e3e3e3; */
+    }
 }
 
 
+    
 
 
-@media(max-width:600px) {
+
+
+@media(max-width:590px) {
+    
     .editor.container {
         border:none;
         display: flex;
         flex-direction: column-reverse;
-        background-color: wheat;
+        /* background-color: wheat; */
     }
     .canvas-container{
         /* object-fit: cover; */
-        width: 350px;
-        height: 350px;
-        margin: 10px;
+        width: 370px;
+        height: 370px;
+        /* margin: 10px; */
     }
     canvas{
-        width: 350px;
-        height: 350px;
+        width: 370px;
+        height: 370px;
         
     }
     .grid-container{
@@ -454,7 +470,8 @@ button:hover{
         height: 20%;
         width: 100%;
         column-gap: 10px;
-        min-width: 340px;
+        /* max-width: 370px; */
+        min-width: 370px;
         padding: 10px;
         row-gap: 10px;
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr 0.5fr;
@@ -535,6 +552,9 @@ button:hover{
     }
     .header-btn{
         display: block;
+        padding: 10px;
+        margin: 5px;
+        background-color: oldlace;
     } 
 
 
@@ -563,10 +583,10 @@ button:hover{
         z-index: 10;
         top:0;
         right: 0;
-        height: 300px;
+        height: 150px;
         border: none;
         flex-direction: column;
-        width: 200px;
+        width: 100%;
         transform: translateX(100%);
         transition: transform .8s;
         
@@ -585,11 +605,12 @@ button:hover{
         justify-content: center;
     }
     .menu-open .main-header .main-nav{
-        
-            transform: translateX(-48%);
+        background-color: #ff7f00;
+
+            transform: translateX(0%);
             margin: 0 auto;
             justify-content: center;
-            align-items: center;
+            /* align-items:start; */
     
         }
     .main-header .main-nav a{
@@ -605,28 +626,43 @@ button:hover{
         /* box-shadow: 0px 0 0 #1d1d1d, inset 0 -6px 0 #58c93a */
     }
     .main-footer{
-        display: none;
+        /* display: none; */
+        height: 7%;
     }
+    body{
+        /* background-color:  #ff7f00; */
+    }
+    .modal-btn{
+        position: fixed;
+        top: 10px;
+        left: 0;
+    }
+    .search {
+        flex-direction: column;
+        padding:none;
+        /* display: flex; */
+        justify-content: center;
+        align-items: center;
+}
 }
 
 
 
-    .search {
+.search {
 
         padding:none;
         /* display: flex; */
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-    }
+}
     
-    .search-words {
+.search-words {
         border-radius: 5px;
         height: 40px;
         width: 215px;
-    }
+}
     
-    .search h3{
+.search h3{
         padding: 10px;
         font-size: 30px;
         margin: 0;
